@@ -6,13 +6,15 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+    extend:{
+      fontFamily: {
+        "Oswald": ['var(--font-oswald)'],
+        "BlackOpsOne": ['var(--font-blackOpsOne)']
       },
-    },
+      colors:{
+        'Tan': '#c8a47e',
+      },
+    }
   },
   plugins: [],
 }

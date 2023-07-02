@@ -1,0 +1,62 @@
+.button {
+  background-color: #c8a47e;
+  border-radius: 0px;
+  height: 60px;
+  width: 130px;
+  border: none;
+  transition: 0.3s;
+  font-size: 16px;
+  color: black;
+}
+
+@media (max-width: 767px) {
+  .mobile {
+    @apply absolute top-16 left-0 w-full h-0 text-3xl bg-black text-center overflow-hidden flex flex-col justify-around;
+    transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .open-menu {
+    @apply h-screen pb-36;
+  }
+  .mobile > li {
+    @apply py-5;
+  }
+  .mobile > .social {
+    @apply flex w-full justify-around;
+  }
+  .hamburger {
+    width: 2em;
+    z-index: 5;
+  }
+
+  .hamburger div {
+    position: relative;
+    width: 1.5em;
+    height: 1px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin-top: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger > .top-bun{
+    margin-top:0;
+  }
+  /* HAMBURGER ANIMATION */
+  #toggle:checked + .hamburger .top-bun {
+    transform: rotate(-45deg);
+    margin-top: 10px;
+  }
+  #toggle:checked + .hamburger .bottom-bun {
+    opacity: 0;
+    transform: rotate(45deg);
+  }
+  #toggle:checked + .hamburger .meat {
+    transform: rotate(45deg);
+    margin-top: -1px;
+  }
+
+  #toggle:checked + .hamburger + .nav {
+    top: 0;
+    transform: scale(1);
+  }
+}

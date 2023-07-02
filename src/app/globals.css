@@ -2,26 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html{
+  @apply font-Oswald bg-black scroll-smooth scroll-pt-16;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.title {
+  @apply pt-5 text-center text-5xl text-white;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
+.bg-Prodotti {
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      90deg,
+      rgba(33, 33, 33, 0.122) 0%,
+      rgba(39, 16, 1, 0.255) 100%
+    ),
+    url('../assets/images/metrobg.jpg');
+  background-size: cover;
+}
+
+input[type=text]{
+  @apply h-8 px-3 rounded-sm
 }

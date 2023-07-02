@@ -1,0 +1,78 @@
+.linea{
+  width: 100%;
+  max-width: 1000px;
+  height: 10px;
+  background-color: blue;
+  position: relative;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px 1px #000000;
+  z-index: 20;
+}
+.nodo{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: -40%;
+}
+.nodo > .cerchio{
+  width: 18px;
+  position: absolute;
+  height: 18px;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+  box-shadow: 0px 0px 0px 3px #000000;
+  background-color: rgb(255, 255, 255);
+  z-index: 4;
+}
+
+.nodo > .taglio{
+  position: absolute;
+  width: 25vw;
+  max-width: 170px;
+  min-width: 130px;
+  height: 10px;
+  top: 20%;
+  left: 50%;
+  box-shadow: 5px 0px 0px 1px #000000;
+  border-radius:2px;
+  /* background-color: rgb(200, 255, 0); */
+  transform-origin: left;
+  rotate: 45deg;
+  z-index: 3;
+}
+.nodo > .taglio2{
+  position: absolute;
+  width: 25vw;
+  max-width: 400px;
+  min-width: 130px;
+  height: 10px;
+  left: 50%;
+  top: 20%;
+  box-shadow: 5px 0px 0px 1px #000000;
+  border-radius:2px;
+  /* background-color: rgb(255, 97, 5); */
+  transform-origin: left;
+  transform: rotate(-45deg);
+  z-index: 3;
+}
+
+.nodo > div > span{
+  position: absolute;
+  color: white;
+  @apply text-lg;
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  .linea{
+    min-width: 700px;
+  }
+  .linea > .nodo:nth-child(odd) > .taglio2 {
+    rotate: 90deg;
+  }
+  .linea > .nodo:nth-child(odd) > .taglio2 > span{
+    rotate: 180deg;
+    @apply top-4 right-0;
+  }
+}
