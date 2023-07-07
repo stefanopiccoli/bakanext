@@ -1,20 +1,30 @@
 import Image from "next/image";
 export default function CardProdotto({
-  title,
+  name,
   description,
+  imageUrl,
 }: {
-  title: string;
+  name: string;
   description: string;
+  imageUrl: string;
 }) {
   return (
     <div className="bg-black/80 shadow-md rounded-lg max-w-sm">
       <div className="flex flex-col w-full h-full">
         <a href="#">
-          <Image className="rounded-t-lg" src="/images/WallStreetPomade.jpg" width={300} height={300} alt="" />
+          <Image
+            className="rounded-t-lg"
+            src={imageUrl}
+            width={400}
+            height={300}
+            alt=""
+          />
         </a>
         <div className="p-5 flex flex-col h-full justify-between">
           <div>
-            <h5 className="text-white font-bold text-2xl tracking-tight mb-2">{title}</h5>
+            <h5 className="text-white font-bold text-2xl tracking-tight mb-2">
+              {name}
+            </h5>
             <p className="font-normal text-gray-400 mb-3">{description}</p>
           </div>
           <a

@@ -1,13 +1,20 @@
 import { AuthContextProvider } from "@/context/AuthContext";
 import "./globals.css";
-import { Oswald, Black_Ops_One } from "next/font/google";
+import { Oswald, Black_Ops_One, Inter } from "next/font/google";
 
 const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
+
 const blackOpsOne = Black_Ops_One({
   subsets: ["latin"],
   variable: "--font-blackOpsOne",
   weight: "400",
 });
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-Inter",
+  weight:"500"
+})
 
 export const metadata = {
   title: "Create Next App",
@@ -21,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={oswald.variable + " " + blackOpsOne.variable}>
+      <body className={oswald.variable + " " + blackOpsOne.variable+ " " + inter.variable}>
         <AuthContextProvider>{children}</AuthContextProvider>
       </body>
     </html>

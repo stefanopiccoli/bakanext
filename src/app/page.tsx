@@ -1,27 +1,30 @@
 import ButtonPrenota from "@/components/ButtonPrenota";
 import CardProdotto from "@/components/CardProdotto";
 import Navbar from "@/components/Navbar";
-import { Products } from "./api/products/route";
+import { Product } from "./api/products/route";
+
+export async function fetchProducts() {
+  try {
+    const res = await fetch("http://127.0.0.1:1337/api/products?populate=*", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
+    const message = await res.json();
+    console.log(message.data);
+
+    return message.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export default async function Home() {
-  
-  async function fetchProducts() {
-    const res = await fetch('http://localhost:3000/api/products', {
-      method: "GET",
-      headers: { 
-        "Content-Type": "application/json"
-      }
-    });
-    if (!res.ok) throw new Error("Failed to fetch products!");    
-    const {message} = await res.json();
-    return message;
-  }
-
-  const products: Products[] = await fetchProducts();
+  const products: Product[] = await fetchProducts();
   console.log(products);
-  
-  
-  
+
   return (
     <div className="overflow-hidden">
       <Navbar />
@@ -46,7 +49,7 @@ export default async function Home() {
           <ButtonPrenota />
         </div>
       </div>
-      {/* <!-- LA METROPOLITANA --> */}input[type=text]
+      {/* <!-- LA METROPOLITANA --> */}
       <section className="bg-black text-[#e1e1e1] font-Oswald">
         <div className="max-w-screen-2xl mx-auto">
           <h1 className="title">La metropolitana</h1>
@@ -105,11 +108,15 @@ export default async function Home() {
                 title="Wall Street Pomade"
                 description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, nesciunt."
               /> */}
-              {products?.map(product =>(
-              <CardProdotto title={product.name} description={product.description} key={product._id} />
-            ))}
+              {products?.map((product) => (
+                <CardProdotto
+                  name={product.attributes.name}
+                  description={product.attributes.description}
+                  key={product.id}
+                  imageUrl={product.attributes.picture.data.attributes.url}
+                />
+              ))}
             </div>
-            
           </div>
         </div>
       </section>
