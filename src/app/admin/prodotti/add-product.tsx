@@ -27,9 +27,8 @@ export default function AddProduct() {
   const [picture, setPicture] = useState<any>();
   const [preview, setPreview] = useState<any>();
 
-  const handleCreate = async (e: FormEvent) => {
+  const handleCreate = (e: FormEvent) => {
     e.preventDefault();
-    console.log("ciaos");
 
     const api = "http://localhost:1337/api/upload";
     const formData = new FormData();
@@ -41,10 +40,8 @@ export default function AddProduct() {
       headers: { Authorization: `Bearer ${auth?.user?.jwt}` },
       body: formData,
     })
-      .then(async (response) => {
-        const json = await response.json();
-        console.log(json);
-
+      .then((response) => response.json())
+      .then((json) =>
         fetch("http://localhost:1337/api/products", {
           method: "POST",
           headers: {
@@ -54,14 +51,12 @@ export default function AddProduct() {
           body: JSON.stringify({
             data: { name, description, picture: json[0].id },
           }),
-        })
-          .then(async (response) => console.log(await response.json()))
-          .catch((error) => console.log(error));
-      })
+        }).then(() => window.location.reload())
+      )
       .catch((error) => console.log(error));
   };
 
-  const handleImage = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setPicture(e.target.files[0]);
       setPreview(URL.createObjectURL(e.target.files[0]));
@@ -70,7 +65,11 @@ export default function AddProduct() {
   return (
     <div>
       <AlertDialog>
-        <AlertDialogTrigger asChild><Button size={"sm"} variant={"default"}><Plus size={20}></Plus></Button></AlertDialogTrigger>
+        <AlertDialogTrigger asChild>
+          <Button size={"sm"} variant={"default"}>
+            <Plus size={20}></Plus>
+          </Button>
+        </AlertDialogTrigger>
         <AlertDialogContent>
           <form
             className="grid w-full max-w-sm items-center gap-3"

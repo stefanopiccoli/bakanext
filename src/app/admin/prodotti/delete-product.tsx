@@ -1,3 +1,4 @@
+"use client";
 import { useAuth } from "@/context/AuthContext";
 
 import {
@@ -17,22 +18,23 @@ import { Trash, Trash2 } from "lucide-react";
 
 export default function DeleteProduct({ product }: { product: Product }) {
   const auth = useAuth();
-  const handleDelete = async (id: string) => {
-    const res = await fetch("http://localhost:1337/api/products/" + id, {
+  const handleDelete = (id: string) => {
+    fetch("http://localhost:1337/api/products/" + id, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${auth?.user?.jwt}`,
       },
-    });
-
-    console.log(await res.json());
-
-    return res;
+    })
+      .then(() => window.location.reload())
+      .catch((error) => console.log(error));
   };
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size={"icon"} variant={"destructive"}> <Trash2 size={20}/></Button>
+        <Button size={"icon"} variant={"destructive"}>
+          {" "}
+          <Trash2 size={20} />
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

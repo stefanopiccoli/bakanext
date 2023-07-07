@@ -20,7 +20,7 @@ export default function AdminLogIn() {
       method: "POST",
       headers:{"Content-Type": "application/json"},
       body: JSON.stringify({ identifier:email, password }),
-      cache: "no-store"
+      cache: "no-cache"
     });
 
     const json = await res.json();
