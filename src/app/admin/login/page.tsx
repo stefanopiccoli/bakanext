@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
-import signIn from "@/lib/firebase/auth/signin";
-import { useAuthContext } from "@/context/AuthContext";
-import signOutt from "@/lib/firebase/auth/signout";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function AdminLogIn() {
-  const user = useAuthContext();
+  const auth = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -15,22 +16,25 @@ export default function AdminLogIn() {
   const handleForm = async (event: FormEvent) => {
     event.preventDefault();
 
-    const { result, error } = await signIn(email, password);
+    const res = await fetch("http://localhost:1337/api/auth/local", {
+      method: "POST",
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify({ identifier:email, password }),
+      cache: "no-store"
+    });
 
-    if (error) {
-      return console.log(error);
-    }
-
-    console.log("success login");
+    const json = await res.json();
+    console.log(json.user);
+    auth?.login(json)
+    return json;
   };
 
   useEffect(() => {
-    user ? router.push("/admin") : null
-  }, [user])
-  
+    auth?.user?.jwt ? router.push("/admin") : null;
+  }, [auth?.user?.jwt]);
 
   return (
-    <div className="font-Oswald h-screen flex justify-center items-center">
+    <div className="font-Inter h-screen flex justify-center items-center">
       <div className="w-96 h-2/3 border-2 border-gray-50 rounded-sm">
         <form
           onSubmit={handleForm}
@@ -43,17 +47,27 @@ export default function AdminLogIn() {
             height={200}
             alt="logo"
           />
-          <p className="text-white">Nome utente:</p>
-          <input type="text" onChange={(e) => setEmail(e.target.value)} />
-          <p className="text-white">Password:</p>
-          <input type="text" onChange={(e) => setPassword(e.target.value)} />
-          <input
-            className="text-white border-2 border-gray-50 h-8"
-            type="submit"
-            value="Accedi"
-          />
-          {user ? (
-            <p onClick={()=>signOutt()} className="bg-white">user si {user.email}</p>
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              type="email"
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              type="password"
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <Button variant="default">Log In</Button>
+          {auth?.user?.jwt ? (
+            <p onClick={() => auth.logout()} className="bg-white">
+              user si {auth.user.jwt}
+            </p>
           ) : (
             <p className="bg-white">user no </p>
           )}

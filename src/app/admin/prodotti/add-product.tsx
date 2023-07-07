@@ -16,11 +16,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
+import { Plus } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function AddProduct() {
-  const [title, setTitle] = useState("");
+  const auth = useAuth();
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState<any>();
   const [preview, setPreview] = useState<any>();
@@ -29,22 +31,34 @@ export default function AddProduct() {
     e.preventDefault();
     console.log("ciaos");
 
-    const api = "/api/products";
+    const api = "http://localhost:1337/api/upload";
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("picture", picture);
-    try {
-      const response = fetch(`${api}`, {
-        method: "POST",
-      });
-      const res = (await response).json();
-      console.log(await res);
-      
-      return res;
-    } catch (error) {
-      console.log(error);
-    }
+
+    formData.append("files", picture);
+
+    fetch(`${api}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${auth?.user?.jwt}` },
+      body: formData,
+    })
+      .then(async (response) => {
+        const json = await response.json();
+        console.log(json);
+
+        fetch("http://localhost:1337/api/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth?.user?.jwt}`,
+          },
+          body: JSON.stringify({
+            data: { name, description, picture: json[0].id },
+          }),
+        })
+          .then(async (response) => console.log(await response.json()))
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleImage = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +70,7 @@ export default function AddProduct() {
   return (
     <div>
       <AlertDialog>
-        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogTrigger asChild><Button size={"sm"} variant={"default"}><Plus size={20}></Plus></Button></AlertDialogTrigger>
         <AlertDialogContent>
           <form
             className="grid w-full max-w-sm items-center gap-3"
@@ -70,14 +84,17 @@ export default function AddProduct() {
                 type="file"
                 onChange={(e) => handleImage(e)}
               />
-              <div className="overflow-scroll h-32">
-                <img src={preview} />
-              </div>
+              {preview ? (
+                <div className="overflow-scroll h-32">
+                  <img src={preview} />
+                </div>
+              ) : null}
+
               <Label htmlFor="picture">Nome</Label>
               <Input
                 id="picture"
                 type="text"
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
               <Label htmlFor="message">Descrizione</Label>
               <Textarea
@@ -89,7 +106,9 @@ export default function AddProduct() {
             <AlertDialogFooter>
               <AlertDialogCancel>Annulla</AlertDialogCancel>
 
-              <Button type="submit">Aggiungi</Button>
+              <AlertDialogAction asChild>
+                <Button type="submit">Aggiungi</Button>
+              </AlertDialogAction>
             </AlertDialogFooter>
           </form>
         </AlertDialogContent>

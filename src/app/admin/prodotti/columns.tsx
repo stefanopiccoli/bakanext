@@ -3,38 +3,26 @@
 import { Product } from "@/app/api/products/route";
 import { ColumnDef } from "@tanstack/react-table";
 
-
-import { Button } from "@/components/ui/button";
-
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
+import DeleteProduct from "./delete-product";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-export const handleDelete = async (id:string) => {
-  const res = await fetch('http://localhost:3000/api/products/'+id, {
-    method: "DELETE",
-    // body: JSON.stringify({id})
-  });
-  
-  console.log(await res.json());
-  
-  return res;
-}
-
 export const columns: ColumnDef<Product>[] = [
+  {
+    accessorKey:"Icon",
+    id: "avatar",
+    cell: ({ row }) => {
+      const product = row.original
+      return (
+        <div>
+          <Image className="object-cover" src={product.attributes.picture.data.attributes.url} alt={""} width={150} height={100} />
+        </div>
+      );
+    },
+  },
   {
     accessorKey: "attributes.name",
     header: "Name",
@@ -48,22 +36,8 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => {
       const product = row.original;
 
-      return (
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant={"destructive"}>Elimina</Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Sei sicuro di voler eleminare il prodotto?</AlertDialogTitle>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Annulla</AlertDialogCancel>
-              <AlertDialogAction asChild onClick={()=>handleDelete(product.id)}><Button variant={"destructive"}>Elimina</Button></AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      );
+      return <DeleteProduct product={product}></DeleteProduct>;
     },
   },
+  
 ];

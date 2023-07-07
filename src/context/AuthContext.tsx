@@ -1,38 +1,44 @@
 "use client";
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import {
-    onAuthStateChanged,
-    getAuth,
-    User,
-} from 'firebase/auth';
-import firebase_app from '@/lib/firebase/config';
+import { type } from "os";
+import { ReactNode, createContext, useContext, useState } from "react";
 
-const auth = getAuth(firebase_app);
+type User = {
+  jwt: string;
+  user: {
+    id: string;
+    username: string;
+    email: string;
+  };
+  login: (user: User) => void;
+  logout: () => void;
+};
 
-export const AuthContext = createContext<User|null>(null);
+type ContextType = {
+  user: User | null;
+  login: (user: User) => void;
+  logout: () => void;
+};
 
-export const useAuthContext = () => useContext(AuthContext);
+const AuthContext = createContext<ContextType|null>(null);
 
-export const AuthContextProvider = ({children} : {children:ReactNode}) => {
-    const [user, setUser] = useState<User|null>(null);
-    const [loading, setLoading] = useState(true);
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser(null);
-            }
-            setLoading(false);
-        });
+  const login = (user: User) => {
+    setUser(user);
+  };
 
-        return () => unsubscribe();
-    }, []);
+  const logout = () => {
+    setUser(null);
+  };
 
-    return (
-        <AuthContext.Provider value={ user }>
-            {loading ? <div>Loading...</div> : children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
 };

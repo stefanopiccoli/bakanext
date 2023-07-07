@@ -1,25 +1,28 @@
 "use client";
-import { useAuthContext } from "@/context/AuthContext";
-import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { fetchProducts } from "@/app/page";
+import AddProduct from "./prodotti/add-product";
+import { DataTable } from "./prodotti/data-table";
+import { columns } from "./prodotti/columns";
 
-export default function AdminPage() {
-  const user = useAuthContext();
+export default async function AdminPage() {
+  const auth = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    user ? null : router.push("/admin/login");
-  }, [user]);
+  // useEffect(() => {
+  //   auth?.user?.jwt ? null : router.push("/admin/login");
+  // }, [auth]);
 
-
+  const data = await fetchProducts();
   return (
-    <div className="p-4 font-Oswald text-white">
-      <div className="text-white text-3xl font-Oswald text-center">ADMIN</div>
-      <div className="flex flex-col items-center pt-5">
-        <Image src="/images/BronxWax.jpg" alt="prodotti" width={300} height={300} className="border-2 border-white"/>
-        <p className="text-2xl">Prodotti</p>
+    <div className="container mx-auto py-10 font-Inter h-screen">
+      <h1 className="text-4xl">Prodotti</h1>
+      <div className="text-right mb-4">
+        <AddProduct></AddProduct>
       </div>
+      <DataTable columns={columns} data={data} />
     </div>
   );
 }

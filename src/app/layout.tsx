@@ -1,4 +1,4 @@
-import { AuthContextProvider } from "@/context/AuthContext";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 import { Oswald, Black_Ops_One, Inter } from "next/font/google";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={oswald.variable + " " + blackOpsOne.variable+ " " + inter.variable}>
-        <AuthContextProvider>{children}</AuthContextProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
