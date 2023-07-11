@@ -6,11 +6,13 @@ import { useAuth } from "@/context/AuthContext";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Loading from "@/components/Loading";
 
 export default function AdminLogIn() {
   const auth = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   const handleForm = async (event: FormEvent) => {
@@ -18,20 +20,25 @@ export default function AdminLogIn() {
 
     const res = await fetch("http://localhost:1337/api/auth/local", {
       method: "POST",
-      headers:{"Content-Type": "application/json"},
-      body: JSON.stringify({ identifier:email, password }),
-      cache: "no-cache"
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identifier: email, password }),
+      cache: "no-cache",
     });
 
     const json = await res.json();
     console.log(json.user);
-    auth?.login(json)
+    auth?.login(json);
     return json;
   };
 
   useEffect(() => {
+    setLoading(true);
     auth?.user?.jwt ? router.push("/admin") : null;
+    setLoading(false);
   }, [auth?.user?.jwt]);
+
+  if(loading)
+    return <Loading />
 
   return (
     <div className="font-Inter h-screen flex justify-center items-center">

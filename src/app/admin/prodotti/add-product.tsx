@@ -62,11 +62,18 @@ export default function AddProduct() {
       setPreview(URL.createObjectURL(e.target.files[0]));
     }
   };
+
+  const clearForm = () => {
+    setName("");
+    setDescription("");
+    setPicture(null);
+    setPreview(null);
+  };
   return (
     <div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button size={"sm"} variant={"default"}>
+          <Button size={"icon"} variant={"default"}>
             <Plus size={20}></Plus>
           </Button>
         </AlertDialogTrigger>
@@ -103,7 +110,7 @@ export default function AddProduct() {
               />
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Annulla</AlertDialogCancel>
+              <AlertDialogCancel onClick={()=>clearForm()}>Annulla</AlertDialogCancel>
 
               <AlertDialogAction asChild>
                 <Button type="submit">Aggiungi</Button>
