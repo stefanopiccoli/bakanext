@@ -1,5 +1,4 @@
 "use client";
-import { Product } from "@/app/api/products/route";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,67 +13,85 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useAuth } from "@/context/AuthContext";
+import { uploadImage } from "@/lib/cloudinary/uploadImage";
+import { db } from "@/lib/firebase/config";
+import { Product } from "@/types/product";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { Edit } from "lucide-react";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 export default function EditProduct({ product }: { product: Product }) {
-  const auth = useAuth();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState<any>(null);
   const [preview, setPreview] = useState<any>(null);
 
   useEffect(() => {
-    setName(product.attributes.name);
-    setDescription(product.attributes.description);
+    setName(product.name);
+    setDescription(product.description);
   }, []);
 
-  const handleEdit = (e: FormEvent) => {
+  const handleEdit = async (e: FormEvent) => {
     e.preventDefault();
 
     const api = "http://localhost:1337/api/upload";
 
     if (picture) {
       const formData = new FormData();
-
-      formData.append("files", picture);
-
-      fetch(`${api}`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${auth?.user?.jwt}` },
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((json) =>
-          fetch("http://localhost:1337/api/products/" + product.id, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${auth?.user?.jwt}`,
-            },
-            body: JSON.stringify({
-              data: { name, description, picture: json[0].id },
-            }),
-          }).then(() => window.location.reload())
-        )
+      formData.append("file", picture);
+      formData.append("upload_preset", "wntlxiwr");
+      const {
+        data: { secure_url },
+      } = await uploadImage(formData);
+      const docRef = doc(db, "products", product.id);
+      await updateDoc(docRef, {
+        name,
+        description,
+        imageUrl: secure_url,
+      } as Product)
+        .then(() => window.location.reload())
         .catch((error) => console.log(error));
     } else {
-      fetch("http://localhost:1337/api/products/" + product.id, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth?.user?.jwt}`,
-        },
-        body: JSON.stringify({
-          data: { name, description },
-        }),
-      })
+      const docRef = doc(db, "products", product.id);
+      await updateDoc(docRef, { name, description } as Product)
         .then(() => window.location.reload())
         .catch((error) => console.log(error));
     }
+    //   fetch(`${api}`, {
+    //     method: "POST",
+    //     headers: { Authorization: `Bearer ` },
+    //     body: formData,
+    //   })
+    //     .then((response) => response.json())
+    //     .then((json) =>
+    //       fetch("http://localhost:1337/api/products/" + product.id, {
+    //         method: "PUT",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           Authorization: `Bearer`,
+    //         },
+    //         body: JSON.stringify({
+    //           data: { name, description, picture: json[0].id },
+    //         }),
+    //       }).then(() => window.location.reload())
+    //     )
+    //     .catch((error) => console.log(error));
+    // } else {
+    //   fetch("http://localhost:1337/api/products/" + product.id, {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer `,
+    //     },
+    //     body: JSON.stringify({
+    //       data: { name, description },
+    //     }),
+    //   })
+    //     .then(() => window.location.reload())
+    //     .catch((error) => console.log(error));
+    // }
   };
-  
+
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setPicture(e.target.files[0]);
@@ -109,7 +126,7 @@ export default function EditProduct({ product }: { product: Product }) {
                 <img src={preview} />
               </div>
             ) : (
-              <img src={product.attributes.picture.data.attributes.url} />
+              <img src={product.imageUrl} />
             )}
 
             <Label htmlFor="picture">Nome</Label>

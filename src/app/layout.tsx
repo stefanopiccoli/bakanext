@@ -1,8 +1,7 @@
-import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
-import { Oswald, Black_Ops_One, Inter } from "next/font/google";
+import { Oswald, Black_Ops_One, Inter, Antonio } from "next/font/google";
 
-const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
+const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald", weight:"500"});
 
 const blackOpsOne = Black_Ops_One({
   subsets: ["latin"],
@@ -13,8 +12,8 @@ const blackOpsOne = Black_Ops_One({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-Inter",
-  weight:"500"
-})
+  weight: "400",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -27,10 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={oswald.variable + " " + blackOpsOne.variable+ " " + inter.variable}>
-        <AuthProvider>{children}</AuthProvider>
-      </body>
-    </html>
+      <html lang="en">
+        <body
+          className={
+            oswald.variable + " " + blackOpsOne.variable + " " + inter.variable
+          }
+        >
+          {children}
+        </body>
+      </html>
   );
 }

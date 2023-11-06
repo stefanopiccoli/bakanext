@@ -1,24 +1,21 @@
 import ButtonPrenota from "@/components/ButtonPrenota";
 import CardProdotto from "@/components/CardProdotto";
 import Navbar from "@/components/Navbar";
-import { Product } from "./api/products/route";
+import { db } from "@/lib/firebase/config";
+import { Product } from "@/types/product";
+import { collection, getDocs } from "firebase/firestore";
 
 export async function fetchProducts() {
-  try {
-    const res = await fetch("http://127.0.0.1:1337/api/products?populate=*", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    });
-    const message = await res.json();
-    console.log(message.data);
-
-    return message.data;
-  } catch (error) {
-    console.log(error);
-  }
+  const products = (await getDocs(collection(db, "products"))).docs.map(
+    (doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })
+  ) as Product[];
+  products.forEach((doc) => {
+    console.log(doc);
+  });
+  return products;
 }
 
 export default async function Home() {
@@ -50,9 +47,9 @@ export default async function Home() {
         </div>
       </div>
       {/* <!-- LA METROPOLITANA --> */}
-      <section className="bg-black text-[#e1e1e1] font-Oswald">
+      <section className="bg-black text-[#e1e1e1] font-Oswald py-16">
         <div className="max-w-screen-2xl mx-auto">
-          <h1 className="title">La metropolitana</h1>
+          <h1 className="title mb-8">La metropolitana</h1>
           <div className="flex flex-col items-center gap-y-14 mb-8">
             <p className="mt-4 text-xl text-center lg:w-2/5">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -63,7 +60,7 @@ export default async function Home() {
             <ButtonPrenota />
           </div>
           <hr className="w-4/5 mx-auto" />
-          <div className="mt-5 pb-20 text-2xl grid gap-y-10 grid-cols-1 md:grid-cols-3 justify-items-center">
+          <div className="mt-5 text-2xl grid gap-y-10 grid-cols-1 md:grid-cols-3 justify-items-center">
             <div className="text-center">
               Martedì-Venerdì
               <br />
@@ -84,10 +81,10 @@ export default async function Home() {
       </section>
       {/* <!-- PRODOTTI --> */}
       <section className="font-Oswald" id="prodotti">
-        <div className="bg-Prodotti py-6">
+        <div className="bg-Prodotti py-16">
           <div className="max-w-screen-2xl mx-auto">
             <h1 className="title">Prodotti</h1>
-            <div className="flex flex-initial flex-wrap justify-center mt-8 gap-8">
+            <div className="flex flex-wrap justify-center mt-8 gap-8">
               {/* <CardProdotto
                 title="Wall Street Pomade"
                 description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, nesciunt."
@@ -110,10 +107,10 @@ export default async function Home() {
               /> */}
               {products?.map((product) => (
                 <CardProdotto
-                  name={product.attributes.name}
-                  description={product.attributes.description}
+                  name={product.name}
+                  description={product.description}
                   key={product.id}
-                  imageUrl={product.attributes.picture.data.attributes.url}
+                  imageUrl={product.imageUrl}
                 />
               ))}
             </div>

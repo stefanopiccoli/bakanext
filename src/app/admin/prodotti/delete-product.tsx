@@ -1,5 +1,4 @@
 "use client";
-import { useAuth } from "@/context/AuthContext";
 
 import {
   AlertDialog,
@@ -13,18 +12,25 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Product } from "@/app/api/products/route";
-import { Trash, Trash2 } from "lucide-react";
+import { db } from "@/lib/firebase/config";
+import { Product } from "@/types/product";
+import { deleteDoc, doc } from "firebase/firestore";
+import { Trash2 } from "lucide-react";
 
 export default function DeleteProduct({ product }: { product: Product }) {
-  const auth = useAuth();
   const handleDelete = (id: string) => {
-    fetch("http://localhost:1337/api/products/" + id, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${auth?.user?.jwt}`,
-      },
-    })
+    // fetch("http://localhost:1337/api/products/" + id, {
+    //   method: "DELETE",
+    //   headers: {
+    //     Authorization: `Bearer`,
+    //   },
+    // })
+    //   .then(() => window.location.reload())
+    //   .catch((error) => console.log(error));
+
+    const docRef = doc(db, "products", id);
+
+    deleteDoc(docRef)
       .then(() => window.location.reload())
       .catch((error) => console.log(error));
   };

@@ -9,25 +9,25 @@ export default function CardProdotto({
   imageUrl: string;
 }) {
   return (
-    <div className="bg-black/80 shadow-md rounded-lg max-w-sm">
+    <div className="bg-black/80 shadow-md rounded-lg w-52 h-40 overflow-hidden">
       <div className="flex flex-col w-full h-full">
         <a href="#">
           <Image
-            className="rounded-t-lg"
+            className="rounded-t-lg h-32 object-cover"
             src={imageUrl}
             width={400}
             height={300}
             alt=""
           />
         </a>
-        <div className="p-5 flex flex-col h-full justify-between">
+        <div className="flex text-lg flex-col h-full justify-between">
           <div>
-            <h5 className="text-white font-bold text-2xl tracking-tight mb-2">
+            <h5 className="text-white font-bold tracking-tight mb-2">
               {name}
             </h5>
-            <p className="font-normal text-gray-400 mb-3">{description}</p>
+            {/* <p className="font-normal text-gray-400 mb-3">{description}</p> */}
           </div>
-          <a
+          {/* <a
             href="#"
             className="text-black bg-Tan hover:bg-Tan/80 focus:ring-4 font-medium rounded-sm text-sm px-3 py-2 text-center inline-flex items-center w-[120px]"
           >
@@ -44,7 +44,7 @@ export default function CardProdotto({
                 clipRule="evenodd"
               ></path>
             </svg>
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 "use client";
 
-import { Product } from "@/app/api/products/route";
 import { ColumnDef } from "@tanstack/react-table";
 
 import DeleteProduct from "./delete-product";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import EditProduct from "./edit-product";
+import { Product } from "@/types/product";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -21,7 +21,7 @@ export const columns: ColumnDef<Product>[] = [
         <div>
           <Image
             className="object-cover"
-            src={product.attributes.picture.data.attributes.url}
+            src={product.imageUrl}
             alt={""}
             width={150}
             height={100}
@@ -31,11 +31,11 @@ export const columns: ColumnDef<Product>[] = [
     },
   },
   {
-    accessorKey: "attributes.name",
+    accessorKey: "name",
     header: "Name",
   },
   // {
-  //   accessorKey: "attributes.description",
+  //   accessorKey: "description",
   //   header: "Description",
   // },
   {
