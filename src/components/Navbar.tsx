@@ -44,10 +44,10 @@ export default function Navbar() {
             <a href="#prodotti" onClick={()=>openMenu()}>Prodotti</a>
           </li>
           <li className="pb-16 list-none md:pb-0 md:inline-block">
-            <a href="#" onClick={()=>openMenu()}>Servizi</a>
+            <a href="#servizi" onClick={()=>openMenu()}>Servizi</a>
           </li>
           <li className="pb-16 list-none md:pb-0 md:inline-block">
-            <a href="#" onClick={()=>openMenu()}>Contatti</a>
+            <a href="#contatti" onClick={()=>openMenu()}>Contatti</a>
           </li>
         </div>
         <a className="hidden md:inline-block" href="#"

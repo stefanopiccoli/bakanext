@@ -2,6 +2,8 @@ import "./globals.css";
 import { Oswald, Black_Ops_One, Inter, Antonio } from "next/font/google";
 
 const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald", weight:"500"});
+const oswald400 = Oswald({ subsets: ["latin"], variable: "--font-oswald400", weight:"400"});
+const oswald300 = Oswald({ subsets: ["latin"], variable: "--font-oswald300", weight:"300"});
 
 const blackOpsOne = Black_Ops_One({
   subsets: ["latin"],
@@ -29,7 +31,7 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={
-            oswald.variable + " " + blackOpsOne.variable + " " + inter.variable
+            oswald.variable + " " + blackOpsOne.variable + " " + inter.variable+ " " + oswald400.variable+ " " + oswald300.variable
           }
         >
           {children}

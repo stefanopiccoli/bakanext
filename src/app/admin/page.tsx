@@ -1,25 +1,14 @@
 import AddProduct from "./prodotti/add-product";
-import { DataTable } from "./prodotti/data-table";
-import { columns } from "./prodotti/columns";
+import AddService from "./servizi/add-service";
+import { DataTable as DataTableProducts } from "./prodotti/data-table";
+import { DataTable as DataTableServices } from "./servizi/data-table";
+import { columns as productsColumns } from "./prodotti/columns";
+import { columns as servicesColumns } from "./servizi/columns";
 import NavbarAdmin from "./navbar";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
 import { Product } from "@/types/product";
-
-// const fetchData = async () => {
-//   fetch("http://127.0.0.1:1337/api/products?populate=*", {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     cache: "no-store",
-//   })
-//     .then((response) => response.json())
-//     .then(({ data }) => {
-//       return data;
-//     })
-//     .catch((error) => console.log(error));
-// };
+import { Service } from "@/types/service";
 
 export default async function AdminPage() {
   const products = (await getDocs(collection(db, "products"))).docs.map(
@@ -28,17 +17,28 @@ export default async function AdminPage() {
       ...doc.data(),
     })
   ) as Product[];
-  products.forEach((doc) => {
-    console.log(doc);
-  });
 
-  // const data = await fetchProducts();
+  const services = (await getDocs(collection(db, "services"))).docs.map(
+    (doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })
+  ) as Service[];
+
   return (
-    <div className="container mx-auto pt-20 font-Inter h-screen">
+    <div className="container mx-auto pt-20 font-Inter">
       <NavbarAdmin />
       <h1 className="text-4xl">Prodotti</h1>
-      <div className="text-right mb-4"><AddProduct></AddProduct></div>
-      {<DataTable columns={columns} data={products} />}
+      <div className="text-right mb-4">
+        <AddProduct></AddProduct>
+      </div>
+      {<DataTableProducts columns={productsColumns} data={products} />}
+      <h1 className="text-4xl mt-8">Servizi</h1>
+      <div className="text-right mb-4">
+        <AddService></AddService>
+      </div>
+
+      {<DataTableServices columns={servicesColumns} data={services} />}
     </div>
   );
 }

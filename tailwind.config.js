@@ -73,6 +73,8 @@ module.exports = {
       },
       fontFamily: {
         "Oswald": ['var(--font-oswald)'],
+        "Oswald400": ['var(--font-oswald400)'],
+        "Oswald300": ['var(--font-oswald300)'],
         "BlackOpsOne": ['var(--font-blackOpsOne)'],
         "Inter": ['var(--font-Inter)']
       },

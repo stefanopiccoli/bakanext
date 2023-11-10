@@ -15,7 +15,7 @@ html{
       rgba(33, 33, 33, 0.122) 0%,
       rgba(39, 16, 1, 0.255) 100%
     ),
-    url('https://images.unsplash.com/photo-1523395555535-a43123287dbc?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    url('../../public/images/subaway.jpg');
   background-size: cover;
   @apply bg-bottom
 }

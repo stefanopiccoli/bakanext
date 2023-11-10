@@ -16,36 +16,25 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { db } from "@/lib/firebase/config";
-import { Product } from "@/types/product";
-import axios from "axios";
 import { addDoc, collection } from "firebase/firestore";
 import { Plus } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { uploadImage } from "@/lib/cloudinary/uploadImage";
+import { FormEvent, useState } from "react";
+import { Service } from "@/types/service";
 
-export default function AddProduct() {
+export default function AddService() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState<any>();
-  const [preview, setPreview] = useState<any>();
+  const [price, setPrice] = useState(0);
 
   const handleCreate = async (e: FormEvent) => {
     e.preventDefault();
 
-    const api = "http://localhost:1337/api/upload";
-    const formData = new FormData();
-
-    formData.append("file", picture);
-    formData.append("upload_preset", "wntlxiwr");
-
     try {
-      const {data: { secure_url }} = await uploadImage(formData);
-
-      const docRef = await addDoc(collection(db, "products"), {
-        imageUrl: secure_url,
+      const docRef = await addDoc(collection(db, "services"), {
         name,
         description,
-      } as Product);
+        price,
+      } as Service);
       console.log("Document written with ID: ", docRef.id);
       window.location.reload();
     } catch (error) {
@@ -53,18 +42,10 @@ export default function AddProduct() {
     }
   };
 
-  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setPicture(e.target.files[0]);
-      setPreview(URL.createObjectURL(e.target.files[0]));
-    }
-  };
-
   const clearForm = () => {
     setName("");
     setDescription("");
-    setPicture(null);
-    setPreview(null);
+    setPrice(0);
   };
   return (
     <div>
@@ -81,18 +62,6 @@ export default function AddProduct() {
           >
             <AlertDialogHeader>
               <AlertDialogTitle>Inserisci un nuovo prodotto</AlertDialogTitle>
-              <Label htmlFor="picture">Foto</Label>
-              <Input
-                id="picture"
-                type="file"
-                onChange={(e) => handleImage(e)}
-              />
-              {preview ? (
-                <div className="overflow-scroll h-32">
-                  <img src={preview} />
-                </div>
-              ) : null}
-
               <Label htmlFor="picture">Nome</Label>
               <Input
                 id="picture"
@@ -104,6 +73,13 @@ export default function AddProduct() {
                 placeholder="Inserisci qui la descrizione..."
                 id="message"
                 onChange={(e) => setDescription(e.target.value)}
+              />
+              <Label htmlFor="price">Prezzo</Label>
+              <Input
+                placeholder="Inserisci qui il prezzo..."
+                id="price"
+                type="number"
+                onChange={(e) => setPrice(Number(e.target.value))}
               />
             </AlertDialogHeader>
             <AlertDialogFooter>

@@ -13,7 +13,7 @@ import { Product } from "@/types/product";
 
 export const columns: ColumnDef<Product>[] = [
   {
-    accessorKey: "Icon",
+    accessorKey: "Foto",
     id: "avatar",
     cell: ({ row }) => {
       const product = row.original;
@@ -32,7 +32,7 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Nome",
   },
   // {
   //   accessorKey: "description",
