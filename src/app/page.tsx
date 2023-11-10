@@ -11,7 +11,7 @@ import { Service } from "@/types/service";
 import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 
-export async function fetchProducts() {
+async function fetchProducts() {
   const products = (await getDocs(collection(db, "products"))).docs.map(
     (doc) => ({
       id: doc.id,
@@ -23,7 +23,7 @@ export async function fetchProducts() {
   });
   return products;
 }
-export async function fetchServices() {
+async function fetchServices() {
   const services = (await getDocs(collection(db, "services"))).docs.map(
     (doc) => ({
       id: doc.id,
