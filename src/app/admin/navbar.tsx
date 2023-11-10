@@ -24,7 +24,7 @@ export default function NavbarAdmin() {
           </>
         ) : (
           <div className="flex">
-            <span className="mr-2">Verificando l`&apos;`accesso</span>
+            <span className="mr-2">Verificando l&apos;accesso</span>
             <Loader2 size={20} color="white" className="animate-spin" />
           </div>
         )}
