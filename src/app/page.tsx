@@ -11,6 +11,7 @@ import { Service } from "@/types/service";
 import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 
+export const revalidate = 0;
 async function fetchProducts() {
   const products = (await getDocs(collection(db, "products"))).docs.map(
     (doc) => ({

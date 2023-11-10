@@ -10,6 +10,7 @@ import { db } from "@/lib/firebase/config";
 import { Product } from "@/types/product";
 import { Service } from "@/types/service";
 
+export const revalidate = 0;
 export default async function AdminPage() {
   const products = (await getDocs(collection(db, "products"))).docs.map(
     (doc) => ({
