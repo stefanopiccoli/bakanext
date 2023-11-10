@@ -150,7 +150,7 @@ export default async function Home() {
         <div>
           <a
             href="https://www.iprenota.it/website/esercente/parrucchiere-uomo/bucchianico/ch/baka-style"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >
             <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
               Prenota ora

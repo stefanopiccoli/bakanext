@@ -5,7 +5,7 @@ export default function ButtonPrenota({classe} : {classe?:string}) {
     <div className={classe}>
       <a
         href="https://www.iprenota.it/website/esercente/parrucchiere-uomo/bucchianico/ch/baka-style"
-        target="_blank"
+        target="_blank" rel="noreferrer"
       >
         <button className="bg-Tan font-Oswald w-32 h-14 text-lg text-black">
           Prenota ora
