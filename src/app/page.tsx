@@ -2,6 +2,7 @@ import ButtonPrenota from "@/components/ButtonPrenota";
 import CardProdotto from "@/components/CardProdotto";
 import CardServizio from "@/components/CardServizio";
 import Navbar from "@/components/Navbar";
+import RadioPlayer from "@/components/RadioPlayer";
 import Facebook from "@/components/svg/Facebook";
 import Instagram from "@/components/svg/Instagram";
 import Tiktok from "@/components/svg/Tiktok";
@@ -71,6 +72,7 @@ export default async function Home() {
         className="bg-black text-[#e1e1e1] font-Oswald py-16"
         id="contatti"
       >
+        <RadioPlayer />
         <div className="max-w-screen-2xl mx-auto">
           <h1 className="title mb-8">La metropolitana</h1>
           <div className="flex flex-col items-center gap-y-14 mb-8">
@@ -151,7 +153,8 @@ export default async function Home() {
         <div>
           <a
             href="https://www.iprenota.it/website/esercente/parrucchiere-uomo/bucchianico/ch/baka-style"
-            target="_blank" rel="noreferrer"
+            target="_blank"
+            rel="noreferrer"
           >
             <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
               Prenota ora
@@ -209,7 +212,9 @@ export default async function Home() {
           <p className="text-white lg:hidden">&copy; 2023 Baka Style</p>
         </div>
         <hr className="w-4/5 mx-auto hidden lg:block mt-4" />
-        <p className="text-white text-center hidden mt-4 lg:block">&copy; 2023 Baka Style</p>
+        <p className="text-white text-center hidden mt-4 lg:block">
+          &copy; 2023 Baka Style
+        </p>
       </section>
     </div>
   );
