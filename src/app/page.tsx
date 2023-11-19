@@ -1,3 +1,4 @@
+import AnimationOnScroll from "@/components/AnimateOnScroll";
 import ButtonPrenota from "@/components/ButtonPrenota";
 import CardProdotto from "@/components/CardProdotto";
 import CardServizio from "@/components/CardServizio";
@@ -20,9 +21,6 @@ async function fetchProducts() {
       ...doc.data(),
     })
   ) as Product[];
-  products.forEach((doc) => {
-    console.log(doc);
-  });
   return products;
 }
 async function fetchServices() {
@@ -32,16 +30,12 @@ async function fetchServices() {
       ...doc.data(),
     })
   ) as Service[];
-  services.forEach((doc) => {
-    console.log(doc);
-  });
   return services;
 }
 
 export default async function Home() {
   const products: Product[] = await fetchProducts();
   const services: Service[] = await fetchServices();
-  console.log(products);
 
   return (
     <div className="overflow-hidden">
@@ -60,10 +54,16 @@ export default async function Home() {
         </video>
         <div className="absolute w-full h-screen top-0 left-0 bg-black/60"></div>
         <div className="w-full absolute top-48 text-center">
-          <p className="font-BlackOpsOne text-Tan/90 text-6xl">Baka Style</p>
-          <p className="font-Oswald text-3xl text-white/75 mb-52">
-            Prossima fermata, lo stile
-          </p>
+          <AnimationOnScroll
+            delay={0}
+            classNameInView="opacity-100"
+            classNameNotInView="opacity-0 translate-y-10"
+          >
+            <p className="font-BlackOpsOne text-Tan/90 text-6xl">Baka Style</p>
+            <p className="font-Oswald text-3xl text-white/75 mb-52">
+              Prossima fermata, lo stile
+            </p>
+          </AnimationOnScroll>
           <ButtonPrenota />
         </div>
       </div>
@@ -74,41 +74,59 @@ export default async function Home() {
       >
         <RadioPlayer />
         <div className="max-w-screen-2xl mx-auto">
-          <h1 className="title mb-8">La metropolitana</h1>
-          <div className="flex flex-col items-center gap-y-14 mb-8">
-            <p className="mt-4 text-xl text-center lg:w-2/5 font-Oswald400">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Reiciendis laborum qui sit! Tempore expedita explicabo quas
-              consectetur labore corrupti esse, hic harum odit rerum
-              consequatur, asperiores ipsa iusto, laudantium temporibus.
-            </p>
-            <ButtonPrenota />
-          </div>
+          <AnimationOnScroll
+            delay={0}
+            classNameInView="opacity-100"
+            classNameNotInView="opacity-0 translate-y-10"
+          >
+            <h1 className="title mb-8">La metropolitana</h1>
+            <div className="flex flex-col items-center gap-y-14 mb-8">
+              <p className="mt-4 text-xl text-center lg:w-2/5 font-Oswald400">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Reiciendis laborum qui sit! Tempore expedita explicabo quas
+                consectetur labore corrupti esse, hic harum odit rerum
+                consequatur, asperiores ipsa iusto, laudantium temporibus.
+              </p>
+              <ButtonPrenota />
+            </div>
+          </AnimationOnScroll>
           <hr className="w-4/5 mx-auto" />
-          <div className="mt-5 text-2xl grid gap-y-10 grid-cols-1 md:grid-cols-3 justify-items-center">
-            <div className="text-center font-Oswald300">
-              Martedì-Venerdì
-              <br />
-              8:15-13:00 / 15:00-20:15
+          <AnimationOnScroll
+            delay={0}
+            classNameInView="opacity-100"
+            classNameNotInView="opacity-0 translate-y-10"
+          >
+            <div className="mt-5 text-2xl grid gap-y-10 grid-cols-1 md:grid-cols-3 justify-items-center">
+              <div className="text-center font-Oswald300">
+                Martedì-Venerdì
+                <br />
+                8:15-13:00 / 15:00-20:15
+              </div>
+              <div className="text-center font-Oswald300">
+                331-6281062
+                <br />
+                bakapr1976@hotmail.it
+              </div>
+              <div className="text-center font-Oswald300">
+                Via San Camillo, 9
+                <br />
+                Bucchianico
+              </div>
             </div>
-            <div className="text-center font-Oswald300">
-              331-6281062
-              <br />
-              bakapr1976@hotmail.it
-            </div>
-            <div className="text-center font-Oswald300">
-              Via San Camillo, 9
-              <br />
-              Bucchianico
-            </div>
-          </div>
+          </AnimationOnScroll>
         </div>
       </section>
       {/* <!-- PRODOTTI --> */}
       <section className="font-Oswald" id="prodotti">
         <div className="bg-Prodotti py-16">
           <div className="max-w-screen-2xl mx-auto">
-            <h1 className="title">Prodotti</h1>
+            <AnimationOnScroll
+              delay={0}
+              classNameInView="opacity-100"
+              classNameNotInView="opacity-0 translate-y-10"
+            >
+              <h1 className="title">Prodotti</h1>
+            </AnimationOnScroll>
             <div className="flex flex-wrap justify-center mt-12 gap-8">
               {/* <CardProdotto
                 title="Wall Street Pomade"
@@ -143,24 +161,36 @@ export default async function Home() {
         </div>
       </section>
       <section className="font-Oswald bg-Tan text-center py-16" id="servizi">
-        <h1 className="text-center text-5xl text-black">Servizi</h1>
+        <AnimationOnScroll
+          delay={0}
+          classNameInView="opacity-100"
+          classNameNotInView="opacity-0 translate-y-10"
+        >
+          <h1 className="text-center text-5xl text-black">Servizi</h1>
+        </AnimationOnScroll>
         <div className="grid grid-cols-1 py-16 gap-8">
           {services?.map((service) => (
             <CardServizio service={service} key={service.id} />
           ))}
         </div>
         {/* <ServiziMetro /> */}
-        <div>
-          <a
-            href="https://www.iprenota.it/website/esercente/parrucchiere-uomo/bucchianico/ch/baka-style"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
-              Prenota ora
-            </button>
-          </a>
-        </div>
+        <AnimationOnScroll
+          delay={0}
+          classNameInView="opacity-100"
+          classNameNotInView="opacity-0 translate-y-10"
+        >
+          <div>
+            <a
+              href="https://www.iprenota.it/website/esercente/parrucchiere-uomo/bucchianico/ch/baka-style"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
+                Prenota ora
+              </button>
+            </a>
+          </div>
+        </AnimationOnScroll>
       </section>
       <section className="bg-black h-screen font-Oswald400 lg:h-auto">
         <div className="flex flex-col gap-4 w-full h-full pt-16 px-4 items-center lg:flex-row lg:pt-0">
