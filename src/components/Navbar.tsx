@@ -41,10 +41,10 @@ export default function Navbar() {
       >
         <div className="md:w-5/12 md:flex md:justify-around items-center">
           <li className="pb-16 list-none md:pb-0 md:inline-block">
-            <a href="#prodotti" onClick={()=>openMenu()}>Prodotti</a>
+            <a href="#servizi" onClick={()=>openMenu()}>Servizi</a>
           </li>
           <li className="pb-16 list-none md:pb-0 md:inline-block">
-            <a href="#servizi" onClick={()=>openMenu()}>Servizi</a>
+            <a href="#prodotti" onClick={()=>openMenu()}>Prodotti</a>
           </li>
           <li className="pb-16 list-none md:pb-0 md:inline-block">
             <a href="#contatti" onClick={()=>openMenu()}>Contatti</a>

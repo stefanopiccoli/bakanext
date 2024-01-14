@@ -67,13 +67,15 @@ export default async function Home() {
           <ButtonPrenota />
         </div>
       </div>
+
+      <RadioPlayer />
       {/* <!-- LA METROPOLITANA --> */}
       <section
-        className="bg-black text-[#e1e1e1] font-Oswald py-16"
+        className="bg-black text-[#e1e1e1] font-Oswald md:h-screen flex flex-col"
         id="contatti"
       >
-        <RadioPlayer />
-        <div className="max-w-screen-2xl mx-auto">
+        <div className="bg-1 hidden md:block md:h-3/5 md:shrink md:w-full"></div>
+        <div className="max-w-screen-2xl mx-auto py-16">
           <AnimationOnScroll
             delay={0}
             classNameInView="opacity-100"
@@ -116,10 +118,43 @@ export default async function Home() {
           </AnimationOnScroll>
         </div>
       </section>
+      {/* <!-- SERVIZI --> */}
+      <section className="font-Oswald bg-Tan text-center py-16" id="servizi">
+        <AnimationOnScroll
+          delay={0}
+          classNameInView="opacity-100"
+          classNameNotInView="opacity-0 translate-y-10"
+        >
+          <h1 className="text-center text-5xl text-black">Servizi</h1>
+        </AnimationOnScroll>
+        <div className="grid grid-cols-1 py-16 gap-8">
+          {services?.map((service) => (
+            <CardServizio service={service} key={service.id} />
+          ))}
+        </div>
+        {/* <ServiziMetro /> */}
+        <AnimationOnScroll
+          delay={0}
+          classNameInView="opacity-100"
+          classNameNotInView="opacity-0 translate-y-10"
+        >
+          <div>
+            <a
+              href="https://www.iprenota.it/website/esercente/parrucchiere-uomo/bucchianico/ch/baka-style"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
+                Prenota ora
+              </button>
+            </a>
+          </div>
+        </AnimationOnScroll>
+      </section>
       {/* <!-- PRODOTTI --> */}
       <section className="font-Oswald" id="prodotti">
         <div className="bg-Prodotti py-16">
-          <div className="max-w-screen-2xl mx-auto">
+          <div className="max-w-screen-lg mx-auto">
             <AnimationOnScroll
               delay={0}
               classNameInView="opacity-100"
@@ -160,43 +195,11 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <section className="font-Oswald bg-Tan text-center py-16" id="servizi">
-        <AnimationOnScroll
-          delay={0}
-          classNameInView="opacity-100"
-          classNameNotInView="opacity-0 translate-y-10"
-        >
-          <h1 className="text-center text-5xl text-black">Servizi</h1>
-        </AnimationOnScroll>
-        <div className="grid grid-cols-1 py-16 gap-8">
-          {services?.map((service) => (
-            <CardServizio service={service} key={service.id} />
-          ))}
-        </div>
-        {/* <ServiziMetro /> */}
-        <AnimationOnScroll
-          delay={0}
-          classNameInView="opacity-100"
-          classNameNotInView="opacity-0 translate-y-10"
-        >
-          <div>
-            <a
-              href="https://www.iprenota.it/website/esercente/parrucchiere-uomo/bucchianico/ch/baka-style"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
-                Prenota ora
-              </button>
-            </a>
-          </div>
-        </AnimationOnScroll>
-      </section>
-      <section className="bg-black h-screen font-Oswald400 lg:h-auto">
-        <div className="flex flex-col gap-4 w-full h-full pt-16 px-4 items-center lg:flex-row lg:pt-0">
+      <section className="bg-black font-Oswald400 lg:h-auto">
+        <div className="flex flex-col gap-4 w-full h-full pt-16 px-4 items-center lg:flex-row lg:pt-4 lg:w-4/5 lg:mx-auto">
           <Image
             src="/images/BakaLogo2.png"
-            className="w-64"
+            className="w-52"
             alt=""
             width={300}
             height={300}
@@ -239,11 +242,11 @@ export default async function Home() {
             <p className="text-white"> Bucchianico </p>
           </div>
           <hr className="w-4/5 mx-auto lg:hidden" />
-          <p className="text-white lg:hidden">&copy; 2023 Baka Style</p>
+          <p className="text-white lg:hidden">&copy; 2024 Baka Style</p>
         </div>
         <hr className="w-4/5 mx-auto hidden lg:block mt-4" />
         <p className="text-white text-center hidden mt-4 lg:block">
-          &copy; 2023 Baka Style
+          &copy; 2024 Baka Style
         </p>
       </section>
     </div>

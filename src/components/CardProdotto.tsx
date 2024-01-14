@@ -9,11 +9,11 @@ export default function CardProdotto({
   imageUrl: string;
 }) {
   return (
-    <div className="bg-black/80 shadow-md rounded-lg w-52 h-40 overflow-hidden font-Oswald300">
+    <div className="bg-black/90 shadow-md rounded-lg w-72 h-56 overflow-hidden font-Oswald300">
       <div className="flex flex-col w-full h-full">
         <a href="#">
           <Image
-            className="rounded-t-lg h-32 object-cover"
+            className="rounded-t-lg h-[11.5rem] object-cover"
             src={imageUrl}
             width={400}
             height={300}
@@ -22,7 +22,7 @@ export default function CardProdotto({
         </a>
         <div className="flex text-lg flex-col h-full justify-between">
           <div>
-            <h5 className="text-white font-bold text-center">
+            <h5 className="text-white font-bold text-center text-2xl">
               {name}
             </h5>
             {/* <p className="font-normal text-gray-400 mb-3">{description}</p> */}
