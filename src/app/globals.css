@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root{
+  @apply lg:text-lg xl:text-xl
+}
+
 html{
   @apply font-Oswald bg-black scroll-smooth scroll-pt-16;
 }
@@ -117,3 +122,26 @@ div[role=alertdialog]{
     @apply bg-background text-foreground;
   }
 }
+
+/* Embla Carousel */
+
+.embla {
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+  --slide-height: 30rem;
+}
+.embla__viewport {
+  @apply overflow-hidden;
+}
+.embla__container {
+  @apply flex touch-pan-y ml-[calc(var(--slide-spacing)_*_-1)];
+  backface-visibility: hidden;
+}
+.embla__slide {
+  @apply flex-[0_0_var(--slide-size)] min-w-0 pl-[var(--slide-spacing)] relative;
+}
+.embla__slide__img {
+  @apply block h-[var(--slide-height)] w-full object-cover;
+}
+
+/* ------ */

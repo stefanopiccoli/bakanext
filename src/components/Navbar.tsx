@@ -32,7 +32,7 @@ export default function Navbar() {
     
 
   <nav
-    className={"fixed z-10 top-0 h-16 md:h-20 w-full bg-black font-Oswald md:shadow-none md:block "+ (scrollTop > 280 ? "md:bg-black" : "md:bg-transparent")}
+    className={"fixed z-20 top-0 h-16 md:h-20 w-full bg-black font-Oswald md:shadow-none md:block "+ (scrollTop > 280 ? "md:bg-black" : "md:bg-transparent")}
     >
     <div className="w-full h-full max-w-screen-2xl mx-auto px-3">
       <div

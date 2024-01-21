@@ -2,6 +2,7 @@ import AnimationOnScroll from "@/components/AnimateOnScroll";
 import ButtonPrenota from "@/components/ButtonPrenota";
 import CardProdotto from "@/components/CardProdotto";
 import CardServizio from "@/components/CardServizio";
+import EmblaCarousel from "@/components/EmblaCarousel";
 import Navbar from "@/components/Navbar";
 import RadioPlayer from "@/components/RadioPlayer";
 import Facebook from "@/components/svg/Facebook";
@@ -61,7 +62,7 @@ export default async function Home() {
           >
             <p className="font-BlackOpsOne text-Tan/90 text-6xl">Baka Style</p>
             <p className="font-Oswald text-3xl text-white/75 mb-52">
-              Prossima fermata, lo stile
+              Prossima fermata: lo stile!
             </p>
           </AnimationOnScroll>
           <ButtonPrenota />
@@ -83,16 +84,22 @@ export default async function Home() {
           >
             <h1 className="title mb-8">La metropolitana</h1>
             <div className="flex flex-col items-center gap-y-14 mb-8">
-              <p className="mt-4 text-xl text-center lg:w-2/5 font-Oswald400">
+              <p className="mt-4 text-xl text-center lg:w-3/5 font-Oswald400">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Reiciendis laborum qui sit! Tempore expedita explicabo quas
                 consectetur labore corrupti esse, hic harum odit rerum
                 consequatur, asperiores ipsa iusto, laudantium temporibus.
               </p>
-              <ButtonPrenota />
+              <ButtonPrenota classe="hidden md:block" />
             </div>
           </AnimationOnScroll>
-          <hr className="w-4/5 mx-auto" />
+          <div className="p-2 py-4 md:hidden">
+            <EmblaCarousel
+              slides={["/images/Locale3.jpg", "/images/Locale2.jpg", "/images/Locale4.jpg"]}
+              options={{ loop: true }}
+            />
+          </div>
+          <hr className="w-11/12 mx-auto hidden md:block" />
           <AnimationOnScroll
             delay={0}
             classNameInView="opacity-100"
@@ -114,6 +121,8 @@ export default async function Home() {
                 <br />
                 Bucchianico
               </div>
+              <ButtonPrenota classe="md:hidden" />
+
             </div>
           </AnimationOnScroll>
         </div>
@@ -191,6 +200,46 @@ export default async function Home() {
                   imageUrl={product.imageUrl}
                 />
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="font-Oswald" id="prodotti">
+        <div className="bg-black py-16">
+          <div className="max-w-screen-lg mx-auto">
+            <AnimationOnScroll
+              delay={0}
+              classNameInView="opacity-100"
+              classNameNotInView="opacity-0 translate-y-10"
+            >
+              <h1 className="title">
+                Angolo <span className="text-Tan">Bar</span>-ber
+              </h1>
+            </AnimationOnScroll>
+            <div className="w-full flex flex-col justify-center mt-10 px-4 gap-4">
+              <div className="text-white text-center font-Oswald300">
+                Goditi il nostro esclusivo angolo bar, dove la tua esperienza di
+                taglio si trasforma in un momento di{" "}
+                <span className="text-Tan font-bold">relax</span>. Dopo il
+                trattamento, goditi una pausa con la nostra selezione di{" "}
+                <span className="text-Tan font-bold">bevande esclusive</span>.
+                Un tocco di gusto e raffinatezza per completare il tuo nuovo
+                look con un sorriso.
+              </div>
+              {/* <Image src="/images/AngoloBar1.jpg" width={500} height={500} alt={""} /> */}
+              <div className="sm:hidden">
+                <EmblaCarousel
+                  slides={["/images/AngoloBar1.jpg", "/images/AngoloBar2.jpg"]}
+                  options={{ loop: true }}
+                />
+              </div>
+              <Image
+                className="hidden sm:block max-h-[34rem] object-cover object-bottom"
+                src="/images/AngoloBar3.jpg"
+                alt=""
+                width={1900}
+                height={1000}
+              />
             </div>
           </div>
         </div>

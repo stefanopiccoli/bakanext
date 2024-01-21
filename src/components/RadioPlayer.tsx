@@ -22,7 +22,7 @@ export default function RadioPlayer() {
       </video>
       <div
         onClick={() => setIsMuted((state) => !state)}
-        className="text-black fixed bottom-6 right-6 rounded-full border-2 border-black p-2 bg-Tan"
+        className="text-black fixed bottom-6 right-6 rounded-full border-2 border-black p-2 bg-Tan cursor-pointer z-10"
       >
         {isMuted ? <VolumeX /> : <Volume2 />}
       </div>
