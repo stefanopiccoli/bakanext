@@ -24,6 +24,7 @@ export const metadata : Metadata = {
   authors: [{name:"Stefano Piccoli", url:"https://piccoli.dev"}],
   creator: "Stefano Piccoli",
   keywords: ["barber","barbershop","baka","bakastyle"],
+  metadataBase: new URL("https://bakastyle.netlify.app")
 
 };
 
