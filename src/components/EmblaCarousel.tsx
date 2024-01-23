@@ -24,8 +24,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 className="embla__slide__img"
                 src={url}
                 alt="Your alt text"
-                width={400}
-                height={400}
+                width={1900}
+                height={1000}
               />
             </div>
           ))}

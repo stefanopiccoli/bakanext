@@ -95,7 +95,7 @@ export default async function Home() {
           </AnimationOnScroll>
           <div className="p-2 py-4 md:hidden">
             <EmblaCarousel
-              slides={["/images/Locale3.jpg", "/images/Locale2.jpg", "/images/Locale4.jpg"]}
+              slides={["/images/Locale5.jpg", "/images/Locale6.jpg", "/images/Locale7.jpg", "/images/Locale8.jpg"]}
               options={{ loop: true }}
             />
           </div>
@@ -254,8 +254,8 @@ export default async function Home() {
             height={300}
           />
           <div className="flex w-full justify-around">
-            <Instagram />
-            <Facebook />
+            <a href="http://instagram.com/_u/subway_barber_baka_style/"><Instagram /></a>
+            <a href="https://www.facebook.com/p/Subway-barber-Baka-style-100040874181047"><Facebook /></a>
             <Tiktok />
           </div>
           <div className="w-full px-8">

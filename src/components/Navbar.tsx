@@ -54,8 +54,8 @@ export default function Navbar() {
           ><Image src="/images/BakaLogo2.png" className="h-20 w-auto py-1" width={300} height={300} alt={''} /></a>
         <ButtonPrenota classe="md:hidden" />
         <div className="social md:w-5/12 md:flex md:items-center md:justify-evenly">
-          <span><Instagram /></span>
-          <span><Facebook /></span>
+          <a href="http://instagram.com/_u/subway_barber_baka_style/"><Instagram /></a>
+          <a href="https://www.facebook.com/p/Subway-barber-Baka-style-100040874181047"><Facebook /></a>
           <span><Tiktok /></span>
           <ButtonPrenota classe="hidden md:inline-block" />
         </div>
