@@ -19,8 +19,8 @@ const inter = Inter({
 });
 
 export const metadata : Metadata = {
-  title: "Bakastyle",
-  description: "Bakastyle Underground Barber Shop, prossima fermata: lo stile!",
+  title: "Baka Style | Underground Barber Shop",
+  description: "Baka Style Underground Barber Shop, prossima fermata: lo stile!",
   authors: [{name:"Stefano Piccoli", url:"https://piccoli.dev"}],
   creator: "Stefano Piccoli",
   keywords: ["barber","barbershop","baka","bakastyle"],
