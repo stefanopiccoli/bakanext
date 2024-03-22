@@ -26,7 +26,7 @@ export async function fetchReservations() {
     }
     date.setDate(date.getDate() + 1);
   }
-  console.log(reservations);
+  // console.log(reservations);
   
   return reservations;
 }

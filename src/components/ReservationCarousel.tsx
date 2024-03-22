@@ -25,7 +25,7 @@ export default function ReservationCarousel() {
   const fetchh = async () => {
     const r: any = await fetchReservations();
     setReservation(r);
-    console.log(reservation);
+    // console.log(reservation);
     setLoading(false);
   };
 
@@ -45,7 +45,26 @@ export default function ReservationCarousel() {
   if (loading) return <div className="h-44 flex justify-center items-center bg-black"><Loader2Icon size={70} className="animate-spin text-Tan"/></div>;
   else
     return (
-      <div className="bg-black px-12">
+      <div className="bg-black px-12 py-8">
+        <Carousel
+          setApi={setApi}
+          orientation="horizontal"
+          opts={{startIndex: startIndex }}
+          className="h-full"
+        >
+          <CarouselContent className="h-12">
+            {Object.keys(reservation).map((item, index) => (
+              <CarouselItem
+                className="h-full text-white flex justify-center items-center font-Oswald400 text-2xl flex-col gap-3"
+                key={index + 100}
+              >
+                {item}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="bg-Tan border-black h-full rounded-none bg-transparent text-white hover:bg-Tan disabled:hidden" />
+          <CarouselNext className="bg-Tan border-black h-full rounded-none bg-transparent text-white hover:bg-Tan disabled:hidden" />
+        </Carousel>
         <Carousel
           orientation="horizontal"
           className="h-full"
@@ -80,26 +99,7 @@ export default function ReservationCarousel() {
           {/* <CarouselPrevious className="bg-Tan border-black h-full rounded-none bg-transparent text-white hover:bg-Tan" />
         <CarouselNext className="bg-Tan border-black h-full rounded-none bg-transparent text-white hover:bg-Tan" /> */}
         </Carousel>
-        <ButtonPrenota classe="text-center mb-9"/>
-        <Carousel
-          setApi={setApi}
-          orientation="horizontal"
-          opts={{startIndex: startIndex }}
-          className="h-full"
-        >
-          <CarouselContent className="h-12">
-            {Object.keys(reservation).map((item, index) => (
-              <CarouselItem
-                className="h-full text-white flex justify-center items-center font-Oswald400 text-2xl flex-col gap-3"
-                key={index + 100}
-              >
-                {item}
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="bg-Tan border-black h-full rounded-none bg-transparent text-white hover:bg-Tan disabled:hidden" />
-          <CarouselNext className="bg-Tan border-black h-full rounded-none bg-transparent text-white hover:bg-Tan disabled:hidden" />
-        </Carousel>
+        <ButtonPrenota classe="text-center"/>
       </div>
     );
 }
