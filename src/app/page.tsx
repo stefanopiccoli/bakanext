@@ -5,6 +5,7 @@ import CardServizio from "@/components/CardServizio";
 import EmblaCarousel from "@/components/EmblaCarousel";
 import Navbar from "@/components/Navbar";
 import RadioPlayer from "@/components/RadioPlayer";
+import ReservationCarousel from "@/components/ReservationCarousel";
 import Facebook from "@/components/svg/Facebook";
 import Instagram from "@/components/svg/Instagram";
 import Tiktok from "@/components/svg/Tiktok";
@@ -153,13 +154,14 @@ export default async function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
+              {/* <button className="bg-black font-Oswald400 w-32 h-14 text-lg text-Tan">
                 Prenota ora
-              </button>
+              </button> */}
             </a>
           </div>
         </AnimationOnScroll>
       </section>
+      <ReservationCarousel/>
       {/* <!-- PRODOTTI --> */}
       <section className="font-Oswald" id="prodotti">
         <div className="bg-Prodotti py-16">
