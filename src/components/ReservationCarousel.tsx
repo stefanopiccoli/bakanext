@@ -50,7 +50,7 @@ export default function ReservationCarousel() {
           setApi={setApi}
           orientation="horizontal"
           opts={{startIndex: startIndex }}
-          className="h-full"
+          className="h-full max-w-screen-lg mx-auto"
         >
           <CarouselContent className="h-12">
             {Object.keys(reservation).map((item, index) => (
@@ -67,7 +67,7 @@ export default function ReservationCarousel() {
         </Carousel>
         <Carousel
           orientation="horizontal"
-          className="h-full"
+          className="h-full max-w-screen-lg mx-auto"
         >
           <CarouselContent className="h-32">
             {Array.isArray(Object.values(reservation)[current]) ? (

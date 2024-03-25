@@ -86,17 +86,24 @@ export default async function Home() {
             <h1 className="title mb-8">La metropolitana</h1>
             <div className="flex flex-col items-center gap-y-14 mb-8">
               <p className="mt-4 text-xl text-center lg:w-3/5 font-Oswald400">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Reiciendis laborum qui sit! Tempore expedita explicabo quas
-                consectetur labore corrupti esse, hic harum odit rerum
-                consequatur, asperiores ipsa iusto, laudantium temporibus.
+                Benvenuti a bordo di Subway Barber, un salone unico nel suo
+                genere che trae ispirazione dall'<span className="text-Tan">energia</span> e dalla <span className="text-Tan">diversità</span> della
+                metropolitana. 
+                <br />
+                Subway Barber non è solo uno spazio per la bellezza, ma una <span className="text-Tan">filosofia di lavoro</span> che celebra l'<span className="text-Tan">unicità del cliente</span>, offrendo un'<span className="text-Tan">esperienza</span> di bellezza su misura e
+                inclusiva.
               </p>
               <ButtonPrenota classe="hidden md:block" />
             </div>
           </AnimationOnScroll>
           <div className="p-2 py-4 md:hidden">
             <EmblaCarousel
-              slides={["/images/Locale5.jpg", "/images/Locale6.jpg", "/images/Locale7.jpg", "/images/Locale8.jpg"]}
+              slides={[
+                "/images/Locale5.jpg",
+                "/images/Locale6.jpg",
+                "/images/Locale7.jpg",
+                "/images/Locale8.jpg",
+              ]}
               options={{ loop: true }}
             />
           </div>
@@ -123,7 +130,6 @@ export default async function Home() {
                 Bucchianico
               </div>
               <ButtonPrenota classe="md:hidden" />
-
             </div>
           </AnimationOnScroll>
         </div>
@@ -161,7 +167,7 @@ export default async function Home() {
           </div>
         </AnimationOnScroll>
       </section>
-      <ReservationCarousel/>
+      <ReservationCarousel />
       {/* <!-- PRODOTTI --> */}
       <section className="font-Oswald" id="prodotti">
         <div className="bg-Prodotti py-16">
@@ -256,8 +262,12 @@ export default async function Home() {
             height={300}
           />
           <div className="flex w-full justify-around">
-            <a href="http://instagram.com/_u/subway_barber_baka_style/"><Instagram /></a>
-            <a href="https://www.facebook.com/p/Subway-barber-Baka-style-100040874181047"><Facebook /></a>
+            <a href="http://instagram.com/_u/subway_barber_baka_style/">
+              <Instagram />
+            </a>
+            <a href="https://www.facebook.com/p/Subway-barber-Baka-style-100040874181047">
+              <Facebook />
+            </a>
             <Tiktok />
           </div>
           <div className="w-full px-8">

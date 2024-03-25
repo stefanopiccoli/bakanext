@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import "./globals.css";
-import { Oswald, Black_Ops_One, Inter, Antonio } from "next/font/google";
+import { Oswald, Black_Ops_One, Inter} from "next/font/google";
 
 const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald", weight:"500"});
 const oswald400 = Oswald({ subsets: ["latin"], variable: "--font-oswald400", weight:"400"});
