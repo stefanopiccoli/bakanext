@@ -87,10 +87,10 @@ export default async function Home() {
             <div className="flex flex-col items-center gap-y-14 mb-8">
               <p className="mt-4 text-xl text-center lg:w-3/5 font-Oswald400">
                 Benvenuti a bordo di Subway Barber, un salone unico nel suo
-                genere che trae ispirazione dall'<span className="text-Tan">energia</span> e dalla <span className="text-Tan">diversità</span> della
+                genere che trae ispirazione dall&apos;<span className="text-Tan">energia</span> e dalla <span className="text-Tan">diversità</span> della
                 metropolitana. 
                 <br />
-                Subway Barber non è solo uno spazio per la bellezza, ma una <span className="text-Tan">filosofia di lavoro</span> che celebra l'<span className="text-Tan">unicità del cliente</span>, offrendo un'<span className="text-Tan">esperienza</span> di bellezza su misura e
+                Subway Barber non è solo uno spazio per la bellezza, ma una <span className="text-Tan">filosofia di lavoro</span> che celebra l&apos;<span className="text-Tan">unicità del cliente</span>, offrendo un&apos;<span className="text-Tan">esperienza</span> di bellezza su misura e
                 inclusiva.
               </p>
               <ButtonPrenota classe="hidden md:block" />
