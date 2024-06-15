@@ -179,7 +179,7 @@ export default async function Home() {
             >
               <h1 className="title">Prodotti</h1>
             </AnimationOnScroll>
-            <div className="flex flex-wrap justify-center mt-12 gap-8">
+            <div className="flex flex-wrap justify-center mt-12 gap-4">
               {/* <CardProdotto
                 title="Wall Street Pomade"
                 description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, nesciunt."
@@ -204,6 +204,7 @@ export default async function Home() {
                 <CardProdotto
                   name={product.name}
                   description={product.description}
+                  price={product.price}
                   key={product.id}
                   imageUrl={product.imageUrl}
                 />

@@ -25,6 +25,7 @@ import { uploadImage } from "@/lib/cloudinary/uploadImage";
 
 export default function AddProduct() {
   const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState<any>();
   const [preview, setPreview] = useState<any>();
@@ -44,6 +45,7 @@ export default function AddProduct() {
       const docRef = await addDoc(collection(db, "products"), {
         imageUrl: secure_url,
         name,
+        price,
         description,
       } as Product);
       console.log("Document written with ID: ", docRef.id);
@@ -62,6 +64,7 @@ export default function AddProduct() {
 
   const clearForm = () => {
     setName("");
+    setPrice(0);
     setDescription("");
     setPicture(null);
     setPreview(null);
@@ -98,6 +101,12 @@ export default function AddProduct() {
                 id="picture"
                 type="text"
                 onChange={(e) => setName(e.target.value)}
+              />
+              <Label htmlFor="price">Price</Label>
+              <Input
+                id="price"
+                type="number"
+                onChange={(e) => setPrice(e.target.valueAsNumber)}
               />
               <Label htmlFor="message">Descrizione</Label>
               <Textarea

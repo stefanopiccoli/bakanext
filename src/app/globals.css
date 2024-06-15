@@ -17,8 +17,8 @@ html{
 .bg-Prodotti {
   background: linear-gradient(
       180deg,
-      rgba(33, 33, 33, 0.5) 0%,
-      rgba(39, 16, 1, 0.255) 100%
+      rgba(0, 0, 0, 0.5) 100%,
+      rgba(0, 0, 0, 0.5) 100%
     ),
     url('../../public/images/StockCere.jpg');
   background-size: cover;

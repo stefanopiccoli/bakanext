@@ -22,12 +22,14 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 export default function EditProduct({ product }: { product: Product }) {
   const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState<any>(null);
   const [preview, setPreview] = useState<any>(null);
 
   useEffect(() => {
     setName(product.name);
+    setPrice(product.price)
     setDescription(product.description);
     setPreview(null);
     setPicture(null);
@@ -48,6 +50,7 @@ export default function EditProduct({ product }: { product: Product }) {
       const docRef = doc(db, "products", product.id);
       await updateDoc(docRef, {
         name,
+        price,
         description,
         imageUrl: secure_url,
       } as Product)
@@ -55,7 +58,7 @@ export default function EditProduct({ product }: { product: Product }) {
         .catch((error) => console.log(error));
     } else {
       const docRef = doc(db, "products", product.id);
-      await updateDoc(docRef, { name, description } as Product)
+      await updateDoc(docRef, { name, description, price } as Product)
         .then(() => window.location.reload())
         .catch((error) => console.log(error));
     }
@@ -70,6 +73,7 @@ export default function EditProduct({ product }: { product: Product }) {
 
   const clearForm = () => {
     setName(product.name);
+    setPrice(product.price);
     setDescription(product.description);
     setPicture(null);
     setPreview(null);
@@ -104,6 +108,13 @@ export default function EditProduct({ product }: { product: Product }) {
               type="text"
               onChange={(e) => setName(e.target.value)}
               defaultValue={name}
+            />
+            <Label htmlFor="price">Prezzo</Label>
+            <Input
+              id="price"
+              type="number"
+              onChange={(e) => setPrice(e.target.valueAsNumber)}
+              defaultValue={price}
             />
             <Label htmlFor="message">Descrizione</Label>
             <Textarea
