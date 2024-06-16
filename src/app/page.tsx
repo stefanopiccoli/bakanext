@@ -167,11 +167,12 @@ export default async function Home() {
           </div>
         </AnimationOnScroll>
       </section>
+      {/* <!-- PRENOTAZIONI -->  */}
       <ReservationCarousel />
       {/* <!-- PRODOTTI --> */}
       <section className="font-Oswald" id="prodotti">
         <div className="bg-Prodotti py-16">
-          <div className="max-w-screen-lg mx-auto">
+          <div className="max-w-screen-xl mx-auto">
             <AnimationOnScroll
               delay={0}
               classNameInView="opacity-100"
@@ -179,7 +180,7 @@ export default async function Home() {
             >
               <h1 className="title">Prodotti</h1>
             </AnimationOnScroll>
-            <div className="flex flex-wrap justify-center mt-12 gap-4">
+            <div className="flex flex-wrap justify-center mt-12 gap-4 lg:gap-12">
               {/* <CardProdotto
                 title="Wall Street Pomade"
                 description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, nesciunt."
