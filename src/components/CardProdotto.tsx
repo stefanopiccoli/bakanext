@@ -10,10 +10,11 @@ export default function CardProdotto({
   price: number;
   imageUrl: string;
 }) {
+  const url = name.replace(" ","-")
   return (
     <div className="w-44 overflow-hidden font-Oswald300">
       <div className="flex flex-col w-full h-full">
-        <a href="#">
+        <a href={`prodotti/${url}`}>
           <Image
             className=" w-44 h-44 object-cover border-white/80 border-2"
             src={imageUrl}
