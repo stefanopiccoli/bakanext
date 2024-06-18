@@ -3,12 +3,11 @@ import ButtonPrenota from "@/components/ButtonPrenota";
 import CardProdotto from "@/components/CardProdotto";
 import CardServizio from "@/components/CardServizio";
 import EmblaCarousel from "@/components/EmblaCarousel";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import RadioPlayer from "@/components/RadioPlayer";
 import ReservationCarousel from "@/components/ReservationCarousel";
-import Facebook from "@/components/svg/Facebook";
-import Instagram from "@/components/svg/Instagram";
-import Tiktok from "@/components/svg/Tiktok";
+
 import { db } from "@/lib/firebase/config";
 import { Product } from "@/types/product";
 import { Service } from "@/types/service";
@@ -87,11 +86,16 @@ export default async function Home() {
             <div className="flex flex-col items-center gap-y-14 mb-8">
               <p className="mt-4 text-xl text-center lg:w-3/5 font-Oswald400">
                 Benvenuti a bordo di Subway Barber, un salone unico nel suo
-                genere che trae ispirazione dall&apos;<span className="text-Tan">energia</span> e dalla <span className="text-Tan">diversità</span> della
-                metropolitana. 
+                genere che trae ispirazione dall&apos;
+                <span className="text-Tan">energia</span> e dalla{" "}
+                <span className="text-Tan">diversità</span> della metropolitana.
                 <br />
-                Subway Barber non è solo uno spazio per la bellezza, ma una <span className="text-Tan">filosofia di lavoro</span> che celebra l&apos;<span className="text-Tan">unicità del cliente</span>, offrendo un&apos;<span className="text-Tan">esperienza</span> di bellezza su misura e
-                inclusiva.
+                Subway Barber non è solo uno spazio per la bellezza, ma una{" "}
+                <span className="text-Tan">filosofia di lavoro</span> che
+                celebra l&apos;
+                <span className="text-Tan">unicità del cliente</span>, offrendo
+                un&apos;<span className="text-Tan">esperienza</span> di bellezza
+                su misura e inclusiva.
               </p>
               <ButtonPrenota classe="hidden md:block" />
             </div>
@@ -254,64 +258,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-black font-Oswald400 lg:h-auto">
-        <div className="flex flex-col gap-4 w-full h-full pt-16 px-4 items-center lg:flex-row lg:pt-4 lg:w-4/5 lg:mx-auto">
-          <Image
-            src="/images/BakaLogo2.png"
-            className="w-52"
-            alt=""
-            width={300}
-            height={300}
-          />
-          <div className="flex w-full justify-around">
-            <a href="http://instagram.com/_u/subway_barber_baka_style/">
-              <Instagram />
-            </a>
-            <a href="https://www.facebook.com/p/Subway-barber-Baka-style-100040874181047">
-              <Facebook />
-            </a>
-            <Tiktok />
-          </div>
-          <div className="w-full px-8">
-            <p>
-              <a className="text-Tan text-lg underline w-full" href="#">
-                Home
-              </a>
-            </p>
-            <p>
-              <a className="text-Tan text-lg underline w-full" href="#prodotti">
-                Prodotti
-              </a>
-            </p>
-            <p>
-              <a className="text-Tan text-lg underline w-full" href="#servizi">
-                Servizi
-              </a>
-            </p>
-            <p>
-              <a className="text-Tan text-lg underline w-full" href="#contatti">
-                Contatti
-              </a>
-            </p>
-          </div>
-          <div className="w-full px-8">
-            <h4 className="text-lg text-white">Orari</h4>
-            <p className="text-white">Mar-Ven</p>
-            <p className="text-white"> 8:15/13:00 - 15:00/20:15 </p>
-          </div>
-          <div className="w-full px-8">
-            <h4 className="text-lg text-white">Luogo</h4>
-            <p className="text-white">Via San Camillo, 9</p>
-            <p className="text-white"> Bucchianico </p>
-          </div>
-          <hr className="w-4/5 mx-auto lg:hidden" />
-          <p className="text-white lg:hidden">&copy; 2024 Baka Style</p>
-        </div>
-        <hr className="w-4/5 mx-auto hidden lg:block mt-4" />
-        <p className="text-white text-center hidden mt-4 lg:block">
-          &copy; 2024 Baka Style
-        </p>
-      </section>
+      <Footer />
     </div>
   );
 }

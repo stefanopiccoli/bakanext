@@ -8,7 +8,7 @@ import '../assets/css/Navbar.css'
 import { useEffect, useState } from 'react';
 
 
-export default function Navbar() {
+export default function Navbar({transparent=true}:{transparent?:boolean}) {
   const [menu, setMenu] = useState<boolean>(false);
   
   const openMenu = () => {
@@ -32,7 +32,7 @@ export default function Navbar() {
     
 
   <nav
-    className={"fixed z-20 top-0 h-16 md:h-20 w-full bg-black font-Oswald md:shadow-none md:block "+ (scrollTop > 280 ? "md:bg-black" : "md:bg-transparent")}
+    className={"fixed z-20 top-0 h-16 md:h-20 w-full bg-black font-Oswald md:shadow-none md:block "+ ((scrollTop > 280) || !transparent ? "md:bg-black" : "md:bg-transparent")}
     >
     <div className="w-full h-full max-w-screen-2xl mx-auto px-3">
       <div
@@ -50,7 +50,7 @@ export default function Navbar() {
             <a href="#contatti" onClick={()=>openMenu()}>Contatti</a>
           </li>
         </div>
-        <a className="hidden md:inline-block" href="#"
+        <a className="hidden md:inline-block" href="/"
           ><Image src="/images/BakaLogo2.png" className="h-20 w-auto py-1" width={300} height={300} alt={''} /></a>
         <ButtonPrenota classe="md:hidden" />
         <div className="social md:w-5/12 md:flex md:items-center md:justify-evenly">

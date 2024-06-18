@@ -11,13 +11,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default async function ProductDescription({
   params,
 }: {
   params: { name: string };
 }) {
-  const product_url = (name:string) => name.replace("-", " ");
+  const product_url = (name: string) => name.replace("-", " ");
   const citiesRef = collection(db, "products");
   const q = query(citiesRef, where("name", "==", product_url(params.name)));
   var product!: Product;
@@ -45,18 +47,26 @@ export default async function ProductDescription({
   }
   if (!product) return <div>Prodotto non trovato</div>;
   return (
-    <div className="">
-      <div className="w-full relative h-screen pb-12 font-Oswald text-white">
+    <div className="bg-black md:pt-24">
+      <Navbar transparent={false} />
+      <div className="w-full relative h-[75vh] pb-12 font-Oswald text-white">
         <Image
-          className="w-full h-72 sticky top-0 z-0"
+          className="w-full h-72 sticky top-12 z-0 md:row-span-3 object-cover object-center md:hidden"
           src={product.imageUrl}
           width="500"
           height="500"
           alt={""}
         ></Image>
-        <div className="relative -top-10 z-10 bg-black overflow-hidden rounded-xl">
-          <Breadcrumb className="pt-4 pl-4 hover:text-white">
-            <BreadcrumbList className="font-Oswald300 text-white/80  text-xl">
+        <div className="relative -top-10 z-10 bg-black overflow-hidden rounded-xl md:top-0 md:rounded-none md:grid md:grid-cols-2">
+          <Image
+            className="hidden w-full h-72 z-0 md:row-span-4 object-cover object-center md:block md:self-center md:h-full"
+            src={product.imageUrl}
+            width="500"
+            height="500"
+            alt={""}
+          ></Image>
+          <Breadcrumb className="pt-4 pl-4 hover:text-white md:pt-0 md:pb-4">
+            <BreadcrumbList className="font-Oswald300 text-white/80 text-xl">
               <BreadcrumbItem>
                 <BreadcrumbLink className="hover:text-white" href="/">
                   HOME
@@ -80,36 +90,43 @@ export default async function ProductDescription({
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="pl-4 pt-8 text-5xl uppercase text-Tan">
+          <div className="pl-4 pt-8 text-5xl uppercase text-Tan md:pt-0 md:self-center">
             {product.name}
           </div>
-          <div className="pt-4 pl-5 text-2xl font-Oswald">
+          <div className="pt-4 pl-5 text-2xl font-Oswald md:self-start md:pt-0">
             {product.price.toFixed(2)} &euro;
           </div>
-          <div className="pt-12 pl-4 font-Oswald300">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Laudantium, quaerat. Consequatur odio amet modi quas deleniti eaque
-            illum delectus sed nesciunt! Quaerat doloremque quos quibusdam eaque
-            sint explicabo pariatur asperiores.
+          <div className="md:h-56">
+            <p className="pt-12 pl-4 font-Oswald300 md:pt-4">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Laudantium, quaerat. Consequatur odio amet modi quas deleniti
+              eaque illum delectus sed nesciunt! Quaerat doloremque quos
+              quibusdam eaque sint explicabo pariatur asperiores.
+            </p>
+            <p className="pt-10 pl-4 font-Oswald300 md:pt-4">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Laudantium, quaerat. Consequatur odio amet modi quas deleniti
+              eaque illum delectus sed nesciunt! Quaerat doloremque quos
+              quibusdam eaque sint explicabo pariatur asperiores.
+            </p>
           </div>
-          <div className="pt-10 pl-4 font-Oswald300">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Laudantium, quaerat. Consequatur odio amet modi quas deleniti eaque
-            illum delectus sed nesciunt! Quaerat doloremque quos quibusdam eaque
-            sint explicabo pariatur asperiores.
-          </div>
-          <h5 className="pt-10 pl-4 font-Oswald300">VEDI ANCHE:</h5>
-          <div className="flex flex-wrap px-6 gap-8 py-6 w-full justify-center">
+          <h5 className="pt-10 pl-4 font-Oswald300 col-span-2 md:hidden">
+            Correlati:
+          </h5>
+          <div className="flex flex-wrap px-6 gap-8 py-6 w-full justify-center md:col-span-2 md:gap-32">
             {products.map((product, index) =>
               rand.includes(index) ? (
-                <a href={`/prodotti/${product.name.replace(" ","-")}`}>
+                <a
+                  href={`/prodotti/${product.name.replace(" ", "-")}`}
+                  key={product.id}
+                  className="md:hidden"
+                >
                   <Image
-                    className="w-24 h-24 object-cover object-center border-2 border-white"
+                    className="w-24 h-24 object-cover object-center border-2 opacity-50 border-white md:w-40 md:h-40 "
                     src={product.imageUrl}
                     alt={""}
                     width={200}
                     height={200}
-                    key={product.id}
                   ></Image>
                 </a>
               ) : null
@@ -117,6 +134,9 @@ export default async function ProductDescription({
           </div>
         </div>
       </div>
+      <section className="hidden md:block">
+        <Footer />
+      </section>
     </div>
   );
 }
