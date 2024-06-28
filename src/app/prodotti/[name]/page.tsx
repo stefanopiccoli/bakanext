@@ -57,7 +57,7 @@ export default async function ProductDescription({
           height="500"
           alt={""}
         ></Image>
-        <div className="relative -top-10 z-10 bg-black overflow-hidden rounded-xl md:top-0 md:rounded-none md:grid md:grid-cols-2">
+        <div className="relative z-10 bg-black overflow-hidden md:top-0 md:rounded-none md:grid md:grid-cols-2">
           <Image
             className="hidden w-full h-72 z-0 md:row-span-4 object-cover object-center md:block md:self-center md:h-full"
             src={product.imageUrl}
